@@ -1,0 +1,14 @@
+flowchart TB
+  subgraph Factory[工厂现场 - 本地自治]
+    App[Vue + Node.js MES Host]
+    Worker[独立 Worker]
+    Plugin[客户插件隔离进程]
+    Agent[独立 AI Runtime 可选]
+    Data[(经认证的业务数据库持久性层)]
+    App --> Data
+    Worker --> Data
+    Plugin -->|授权调用| App
+    Agent -->|受控动作| App
+  end
+  Center[集团共享数据 / 指令层]
+  Factory <-->|异步事件 指令 快照| Center

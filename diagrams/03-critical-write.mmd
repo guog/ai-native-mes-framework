@@ -1,0 +1,15 @@
+sequenceDiagram
+    actor User as 用户或 Agent
+    participant API as GraphQL/REST/MCP 适配
+    participant Action as 受控业务动作
+    participant DB as 工厂本地业务库
+    participant Relay as Outbox/Worker
+    User->>API: 提交动作(稳定请求ID)
+    API->>Action: 规范化动作与请求上下文
+    Action->>Action: 授权/审批/参数/版本/幂等校验
+    Action->>DB: 本地事务：业务+关键审计+Outbox+执行记录
+    DB-->>Action: 满足认证持久性时确认提交
+    Action-->>API: 业务动作结果
+    API-->>User: 成功或可明确核查的状态
+    Relay->>DB: 安全领取待发事件
+    Relay-->>Relay: 至少一次投递、重试与去重协作

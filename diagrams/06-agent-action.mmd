@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant Agent as AI Runtime
+    participant API as MES Action Gateway
+    participant Auth as Policy/Approval
+    participant DB as Factory DB
+    Agent->>API: actionId, payload, requestId
+    API->>Auth: 授权/审批/资源版本
+    Auth-->>API: 许可或拒绝
+    API->>DB: 同事务业务/幂等/审计/Outbox
+    alt 提交确认
+        DB-->>API: COMMITTED
+    else 结果不确定
+        DB-->>API: UNKNOWN
+        API->>DB: 按 requestId 核查
+    end
+    API-->>Agent: 状态与关联 ID

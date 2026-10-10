@@ -1,0 +1,917 @@
+{
+  "version": "1",
+  "date": "2026-10-10",
+  "notes": "normalized summaries from the 16 confirmed GrillMe rounds; not verbatim",
+  "decisions": [
+    {
+      "id": "ADR-001",
+      "round": 1,
+      "title": "技术基础框架",
+      "decision": "作为 MES 技术基础框架，不预置完整 MES 业务产品",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-002",
+      "round": 1,
+      "title": "单工厂与集团部署",
+      "decision": "兼容单工厂独立部署及集团多工厂部署",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-003",
+      "round": 1,
+      "title": "通用行业定位",
+      "decision": "不指定先行行业，不把行业特定生产模型写死在基础框架",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-004",
+      "round": 1,
+      "title": "AI Native 三方向",
+      "decision": "同时支持 AI 原生研发、AI 原生产品和 AI 原生扩展",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-005",
+      "round": 1,
+      "title": "Hybrid 扩展模式",
+      "decision": "Code First 为主体，结合适当配置能力",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-006",
+      "round": 1,
+      "title": "生产关键业务可靠性",
+      "decision": "按生产关键业务系统要求保障数据正确性、运行可靠和恢复能力",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-007",
+      "round": 2,
+      "title": "模块化单体",
+      "decision": "采用 Modular Monolith 作为核心架构形态",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-008",
+      "round": 2,
+      "title": "集团共享数据隔离",
+      "decision": "集团共享数据层采用共享库并按工厂隔离；适用范围依 ADR-022",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-009",
+      "round": 2,
+      "title": "动态插件",
+      "decision": "支持运行时动态插件和热加载",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-010",
+      "round": 2,
+      "title": "AI 自主操作",
+      "decision": "允许 AI 自主执行符合权限与规则的业务动作",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-011",
+      "round": 2,
+      "title": "工业集成边界",
+      "decision": "工业协议由独立适配器或边缘网关负责，框架提供标准接口",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-012",
+      "round": 2,
+      "title": "TypeScript 全栈",
+      "decision": "采用 Node.js / TypeScript 全栈技术路线",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-013",
+      "round": 2,
+      "title": "Linux 容器交付",
+      "decision": "Linux + Docker，优先轻量化部署",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-014",
+      "round": 2,
+      "title": "工厂离线自治",
+      "decision": "工厂与集团网络中断时工厂仍需独立持续生产",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-015",
+      "round": 2,
+      "title": "四数据库初期支持",
+      "decision": "初期正式支持 PostgreSQL、SQL Server、MySQL、达梦",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-016",
+      "round": 3,
+      "title": "本地工厂数据权威",
+      "decision": "各工厂具备本地完整 MES 与业务数据库；集团共享库负责汇总和集团业务",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-017",
+      "round": 3,
+      "title": "插件热安装停启",
+      "decision": "不停机安装及启停，升级允许受控维护窗口",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-018",
+      "round": 3,
+      "title": "插件信任与签发",
+      "decision": "项目团队和客户可开发插件，必须经过验证、签发和授权",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-019",
+      "round": 3,
+      "title": "AI 动作策略",
+      "decision": "按业务动作配置执行策略，授权动作可自主执行，关键动作默认审批",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-020",
+      "round": 3,
+      "title": "单实例主数据库",
+      "decision": "每个 MES 实例只选择一种主业务库，四数据库均为正式支持目标",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-021",
+      "round": 3,
+      "title": "跨客户隔离",
+      "decision": "不同客户独立部署，同一客户支持多工厂",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-022",
+      "round": 4,
+      "title": "Q8 适用范围澄清",
+      "decision": "集团共享数据层按工厂隔离，工厂生产业务以本地库为权威",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-023",
+      "round": 4,
+      "title": "异步准实时同步",
+      "decision": "工厂与集团准实时异步同步，断网积压，恢复后自动补传",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-024",
+      "round": 4,
+      "title": "插件混合进程隔离",
+      "decision": "可信内部扩展可同进程，客户及低信任插件独立隔离",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-025",
+      "round": 4,
+      "title": "插件数据所有权",
+      "decision": "插件拥有自己的业务表，通过公开契约访问其他模块数据",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-026",
+      "round": 4,
+      "title": "Agent 双重身份",
+      "decision": "支持代表用户和后台服务身份，分别授权与审计",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-027",
+      "round": 4,
+      "title": "AI 离线降级",
+      "decision": "核心 MES 离线可用，AI 允许失效或降级",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-028",
+      "round": 4,
+      "title": "AI 生成扩展发布",
+      "decision": "AI 生成代码须经 Git/CI、测试、审查及签发后部署",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-029",
+      "round": 4,
+      "title": "数据库兼容责任",
+      "decision": "框架和官方插件支持四库，客户插件可针对目标库",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-030",
+      "round": 5,
+      "title": "集团业务指令控制",
+      "decision": "集团下发业务指令，由工厂本地校验、接受或拒绝并执行",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-031",
+      "round": 5,
+      "title": "跨站点业务事件契约",
+      "decision": "以业务事件及明确数据变更契约同步，支持状态快照",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-032",
+      "round": 5,
+      "title": "插件公开扩展机制",
+      "decision": "版本化 SDK、业务接口、事件、扩展点及 UI 插槽",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-033",
+      "round": 5,
+      "title": "插件数据库迁移",
+      "decision": "兼容性迁移允许热安装，破坏性变更进入维护窗口",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-034",
+      "round": 5,
+      "title": "插件安全停用",
+      "decision": "停止新请求，在途操作完成或安全中止，后台任务保存持久化检查点",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-035",
+      "round": 5,
+      "title": "AI 显式业务动作",
+      "decision": "显式动作注册，定义输入输出、权限、风险及执行策略",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-036",
+      "round": 5,
+      "title": "后台 Agent 限权",
+      "decision": "可撤销、有范围、有期限，限制资源、动作及执行额度",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-037",
+      "round": 5,
+      "title": "AI 研发工程契约",
+      "decision": "仓库版本化架构规则、模块契约、Schema、测试约束与 Agent 指引",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-038",
+      "round": 5,
+      "title": "部署等级",
+      "decision": "支持标准与高可用两类部署，按客户选择",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-039",
+      "round": 6,
+      "title": "本地离线认证",
+      "decision": "工厂具有本地认证及授权策略，断网可登录",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-040",
+      "round": 6,
+      "title": "可靠消息交付",
+      "decision": "持久化至少一次交付、接收端幂等、按业务实体维护必要顺序",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-041",
+      "round": 6,
+      "title": "数据唯一权威",
+      "decision": "每类共享数据有唯一权威写入方，其他节点通过变更请求修改",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-042",
+      "round": 6,
+      "title": "插件资源隔离",
+      "decision": "限制低信任插件数据库权限、文件、网络、CPU、内存与进程资源",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-043",
+      "round": 6,
+      "title": "SDK 兼容策略",
+      "decision": "SDK 版本化，插件声明兼容范围，安装前校验",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-044",
+      "round": 6,
+      "title": "AI 统一动作执行",
+      "decision": "统一入口强制验证，审批绑定具体请求与有效期",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-045",
+      "round": 6,
+      "title": "持久化后台任务",
+      "decision": "框架统一提供任务契约、重试、检查点及安全停用",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-046",
+      "round": 6,
+      "title": "RTO/RPO 验收",
+      "decision": "标准和高可用部署分别定义 RTO/RPO 并通过故障演练验收",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-047",
+      "round": 6,
+      "title": "四库真实测试",
+      "decision": "CI 用四种真实数据库执行迁移、事务和集成测试",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-048",
+      "round": 6,
+      "title": "前端插件隔离",
+      "decision": "可信 UI 可集成运行，低信任 UI 使用 iframe 等隔离机制",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-049",
+      "round": 7,
+      "title": "Transactional Outbox",
+      "decision": "业务数据和待发送事件在同一本地数据库事务中提交",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-050",
+      "round": 7,
+      "title": "事件契约版本化",
+      "decision": "跨站点契约显式演进，兼容期支持旧版本",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-051",
+      "round": 7,
+      "title": "长时离线恢复",
+      "decision": "按同步检查点补传事件，必要时快照及对账修复",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-052",
+      "round": 7,
+      "title": "集团身份本地凭据",
+      "decision": "集团统一身份目录，工厂缓存可离线验证的凭据和授权信息",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-053",
+      "round": 7,
+      "title": "模块调用方式",
+      "decision": "公开服务接口同步调用，以异步事件协作",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-054",
+      "round": 7,
+      "title": "跨模块事务",
+      "decision": "模块自治优先，确有必要经公开契约共享本地事务",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-055",
+      "round": 7,
+      "title": "客户插件数据库权限",
+      "decision": "插件独立最小权限身份，框架管理迁移与跨模块访问",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-056",
+      "round": 7,
+      "title": "AI 审批版本一致性",
+      "decision": "审批绑定动作、参数、资源版本和有效期，执行前再验证",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-057",
+      "round": 7,
+      "title": "可靠性等级默认目标",
+      "decision": "框架提供经测试的恢复基线，客户可选更严格的已认证方案",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-058",
+      "round": 8,
+      "title": "最小稳定内核",
+      "decision": "最小稳定内核与可选官方技术模块分离",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-059",
+      "round": 8,
+      "title": "模块依赖约束",
+      "decision": "只能依赖公开契约，静态依赖无环，禁止访问其他模块内部实现",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-060",
+      "round": 8,
+      "title": "共享事务参与者",
+      "decision": "仅同数据库、同事务上下文的可信模块可共享本地事务；隔离插件经 API 协作",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-061",
+      "round": 8,
+      "title": "事件分类",
+      "decision": "区分进程内通知和持久化可靠业务事件，后者采用 Outbox 等机制",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-062",
+      "round": 8,
+      "title": "插件故障降级",
+      "decision": "故障插件被隔离，依赖它的功能安全停用，其他功能继续运行",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-063",
+      "round": 8,
+      "title": "Vue 应用壳",
+      "decision": "统一 Vue 应用壳，可信模块注册路由、菜单与 UI 插槽，低信任 UI 隔离",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-064",
+      "round": 8,
+      "title": "Code First 元数据边界",
+      "decision": "表单、列表、报表、展示规则可配置；关键事务与复杂规则用代码",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-065",
+      "round": 8,
+      "title": "独立 AI Runtime",
+      "decision": "独立 Agent 运行服务，MES 暴露受控动作及事件，模型接入可替换",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-066",
+      "round": 8,
+      "title": "GraphQL 主要业务 API",
+      "decision": "GraphQL 为主业务接口，REST 和 MCP 为适配入口",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-067",
+      "round": 8,
+      "title": "本地权限撤销",
+      "decision": "本地维护权限有效期与版本，支持紧急撤销，中心变更联网后传播",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-068",
+      "round": 9,
+      "title": "模块 GraphQL Schema",
+      "decision": "模块声明 Schema 和 Resolver，框架统一组合、校验冲突及发布",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-069",
+      "round": 9,
+      "title": "GraphQL 兼容演进",
+      "decision": "优先兼容扩展、字段弃用及过渡期，不轻易引入全局 API 版本",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-070",
+      "round": 9,
+      "title": "GraphQL 资源治理",
+      "decision": "统一深度、复杂度、分页、超时、额度限制，高风险查询可白名单",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-071",
+      "round": 9,
+      "title": "业务动作权威",
+      "decision": "业务动作契约是权威，GraphQL Mutation、REST、MCP 调用相同应用服务",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-072",
+      "round": 9,
+      "title": "GraphQL 工厂级授权",
+      "decision": "统一请求上下文及应用服务授权，GraphQL 施加字段和资源级约束",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-073",
+      "round": 9,
+      "title": "模块清单和生命周期",
+      "decision": "最小内核管理显式模块清单、依赖图及生命周期",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-074",
+      "round": 9,
+      "title": "独立持久化 Worker",
+      "decision": "统一持久化任务由独立 Worker 执行，可与 MES 同机部署",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-075",
+      "round": 9,
+      "title": "声明式 UI 配置",
+      "decision": "配置版本化，可在权限和兼容性验证后运行时覆盖",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-076",
+      "round": 9,
+      "title": "工业数据与 GraphQL",
+      "decision": "高频采集和写入走独立集成通道；GraphQL 处理业务查询和动作",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-077",
+      "round": 9,
+      "title": "配置与密钥",
+      "decision": "类型化分层配置、动态设置受审计、敏感凭据分离并可离线运行",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-078",
+      "round": 10,
+      "title": "GraphQL Schema 原子发布",
+      "decision": "新快照构建并校验后原子切换，旧请求安全完成或中止，失败保留旧版",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-079",
+      "round": 10,
+      "title": "GraphQL 命名所有权",
+      "decision": "全局命名与所有权规范，插件安装时强制检查 Schema 冲突",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-080",
+      "round": 10,
+      "title": "TypeScript 动作 Schema",
+      "decision": "TypeScript 与运行时 Schema 定义权威动作，再适配不同协议",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-081",
+      "round": 10,
+      "title": "配置覆盖层级",
+      "decision": "基础、客户、工厂配置分层，支持差异、审计和回滚",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-082",
+      "round": 10,
+      "title": "任务处理器版本",
+      "decision": "任务记录模块和处理器版本，停用停止领取新任务，在途完成或检查点保存，恢复前检验兼容",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-083",
+      "round": 10,
+      "title": "插件能力授权",
+      "decision": "插件声明能力，管理员授权，运行时按身份及能力强制执行",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-084",
+      "round": 10,
+      "title": "Agent 动作目录",
+      "decision": "框架提供版本化动作目录，按 Agent 身份筛选可发现能力，执行时复核策略",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-085",
+      "round": 10,
+      "title": "实时业务推送可选",
+      "decision": "GraphQL 实时推送为可选官方模块，默认普通查询并允许轮询降级",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-086",
+      "round": 10,
+      "title": "持久化适配契约",
+      "decision": "可移植持久化契约隔离四数据库差异，必要时提供受测试约束的专属实现",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-087",
+      "round": 10,
+      "title": "Code Agent 模块验收",
+      "decision": "机器可读模块规范和可执行契约验证，CI 强制检查架构、权限、迁移和测试",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-088",
+      "round": 11,
+      "title": "插件停用 Schema 兼容",
+      "decision": "兼容期保留 Schema 结构，已停用能力返回明确不可用错误，到期按规则删除",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-089",
+      "round": 11,
+      "title": "HA 多实例 Schema",
+      "decision": "版本化 Schema 快照逐步发布，实例就绪报告，短期双版本共存",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-090",
+      "round": 11,
+      "title": "GraphQL 读取模型",
+      "decision": "模块显式查询契约与读取模型，Resolver 经受控查询服务访问数据",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-091",
+      "round": 11,
+      "title": "动作幂等契约",
+      "decision": "各动作声明幂等策略，关键生产状态变更默认要求幂等键与持久化去重",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-092",
+      "round": 11,
+      "title": "Worker 至少一次执行",
+      "decision": "至少一次执行，处理器必须幂等或可恢复，失败任务可隔离及人工恢复",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-093",
+      "round": 11,
+      "title": "插件跨库迁移契约",
+      "decision": "通用迁移契约与数据库适配能力，必要时数据库特有迁移实现",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-094",
+      "round": 11,
+      "title": "动态配置受控发布",
+      "decision": "普通配置可审计动态生效，安全授权和关键业务配置需版本校验受控发布",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-095",
+      "round": 11,
+      "title": "长期 Agent 权限复核",
+      "decision": "每次动作执行前再验证权限与状态，撤销后阻止后续动作，在途事务安全结束",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-096",
+      "round": 11,
+      "title": "生产插件发布审批",
+      "decision": "所有生产插件安装及升级必须授权人员最终批准",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-097",
+      "round": 11,
+      "title": "跨系统审计关联",
+      "decision": "统一关联标识及结构化审计，记录身份、授权决策、业务动作、版本与结果",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-098",
+      "round": 12,
+      "title": "HA 故障范围",
+      "decision": "HA 覆盖工厂内部单服务器、服务实例、数据库节点故障，机房灾难独立灾备",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-099",
+      "round": 12,
+      "title": "离线积压容量",
+      "decision": "按业务量和离线时长规划持久化容量及告警，关键事件不得静默丢失",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-100",
+      "round": 12,
+      "title": "TypeScript Monorepo",
+      "decision": "内核、官方模块、SDK 与应用统一 Monorepo，客户插件可独立仓库",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-101",
+      "round": 12,
+      "title": "轻量 Node.js 宿主",
+      "decision": "使用成熟 HTTP/GraphQL 组件，自研仅必要模块与插件运行内核",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-102",
+      "round": 12,
+      "title": "ORM 与 SQL 原则",
+      "decision": "以持久化契约和适配为基础，允许 ORM、类型安全查询与受控 SQL 结合",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-103",
+      "round": 12,
+      "title": "Agent 长任务责任",
+      "decision": "独立 AI Runtime 管理编排和检查点，MES 管理动作记录及生产事务，以关联 ID 协作",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-104",
+      "round": 12,
+      "title": "不可变插件包",
+      "decision": "签名不可变插件包及清单声明组件、权限、依赖和兼容版本，一致安装激活",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-105",
+      "round": 12,
+      "title": "数据库扩展迁移",
+      "decision": "优先 Expand–Migrate–Contract，升级预检及备份，允许代码回退和受控数据修复",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-106",
+      "round": 12,
+      "title": "架构访谈收敛",
+      "decision": "关键决策闭合后形成可验证蓝图、技术选型、契约、质量属性标准及风险计划，不要求先实现",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-107",
+      "round": 13,
+      "title": "关键事务零确认丢失",
+      "decision": "关键生产事务要求零已确认提交丢失，派生可重建数据单独管理",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-108",
+      "round": 13,
+      "title": "分级 RTO",
+      "decision": "标准部署 RTO 不超过4小时；高可用部署不超过15分钟",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-109",
+      "round": 13,
+      "title": "关键审计原子提交",
+      "decision": "关键审计记录与本地业务事务原子提交，外部汇聚异步，诊断日志可降级",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-110",
+      "round": 13,
+      "title": "插件关键状态受控写入",
+      "decision": "生产关键状态必须经受控动作修改；插件仅最小权限直写非关键私有数据",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-111",
+      "round": 13,
+      "title": "同进程插件逻辑停用",
+      "decision": "撤销入口、停止任务、回收可管理资源，不要求彻底卸载 JS，升级可维护窗口",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-112",
+      "round": 13,
+      "title": "数据库部署认证",
+      "decision": "数据库×框架版本×部署模式分别认证功能和 HA，仅对通过组合承诺支持",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-113",
+      "round": 14,
+      "title": "关键持久性保障方案",
+      "decision": "允许按数据库部署组合采用同步复制或认证高可靠存储，统一验证零已确认事务丢失",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-114",
+      "round": 14,
+      "title": "派生数据 RPO",
+      "decision": "派生数据可丢失后重建，权威原始数据按业务等级持久化",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-115",
+      "round": 14,
+      "title": "Fastify GraphQL Yoga Tools",
+      "decision": "HTTP/GraphQL 采用 Fastify + GraphQL Yoga + GraphQL Tools，版本化 Schema 快照由框架管理",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-116",
+      "round": 14,
+      "title": "Zod 动作 Schema",
+      "decision": "以 Zod 作为动作运行时 Schema 与 TypeScript 类型推断工具",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-117",
+      "round": 14,
+      "title": "Kysely DM 适配优先",
+      "decision": "优先 Kysely；达梦通过 dmdb 验证专属 Dialect，失败保留替代路线",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-118",
+      "round": 14,
+      "title": "主库 Worker",
+      "decision": "基于主业务数据库建立最小持久化任务机制，独立 Worker 执行，避免多余基础组件",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-119",
+      "round": 15,
+      "title": "持久性失效安全降级",
+      "decision": "持久性无法保证时拒绝确认新关键写入，安全查询和非关键功能可继续",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-120",
+      "round": 15,
+      "title": "数据库脑裂防护",
+      "decision": "保持单一权威写入节点，备用节点提升前必须仲裁并 Fencing 旧主节点",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-121",
+      "round": 15,
+      "title": "提交结果未知",
+      "decision": "稳定业务请求 ID 与持久化执行记录，先查询原结果，再判断是否执行",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-122",
+      "round": 15,
+      "title": "四库 Worker 租约",
+      "decision": "统一任务状态与租约契约，各数据库验证锁/领取/续约，处理器幂等或可恢复",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-123",
+      "round": 15,
+      "title": "达梦适配替代",
+      "decision": "Kysely 优先；Dialect 不可靠时通过持久化契约切换受控 dmdb/SQL，保留四数据库目标",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-124",
+      "round": 15,
+      "title": "HA 责任",
+      "decision": "经认证数据库 HA 或存储基础设施负责切换，MES 负责健康检查、重连、拒写、恢复及审计",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-125",
+      "round": 15,
+      "title": "性能基准方法",
+      "decision": "参考业务负载包含 GraphQL、关键写、Worker、Outbox、同步，定义并发及 P95 并按规模分级",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-126",
+      "round": 16,
+      "title": "标准部署独立故障域",
+      "decision": "允许单应用实例，但关键数据跨独立故障域同步持久化；可人工恢复，RTO不超过4小时",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-127",
+      "round": 16,
+      "title": "数据库认证版本",
+      "decision": "明确四数据库已认证大版本、驱动版本、兼容窗口与升级策略",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-128",
+      "round": 16,
+      "title": "参考业务测试模块",
+      "decision": "仅为性能测试建立参考业务模块，覆盖查询、写入、审计、Worker、同步并规定数据/硬件基线",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-129",
+      "round": 16,
+      "title": "认证故障注入",
+      "decision": "每个正式认证组合测试节点损毁、网络分区、提交中断、切换及恢复，核查数据审计及业务结果",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-130",
+      "round": 16,
+      "title": "插件 AI 安全负测",
+      "decision": "CI/发布门禁包含越权、工厂隔离、非法写入、插件故障、Agent 授权撤销与审批绕过等负向测试",
+      "status": "Accepted"
+    }
+  ]
+}

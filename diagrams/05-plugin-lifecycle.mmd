@@ -1,0 +1,13 @@
+stateDiagram-v2
+    [*] --> Discovered
+    Discovered --> Verified: 签名依赖授权校验
+    Verified --> Staged: 预检迁移/资源隔离
+    Staged --> Ready: Schema 与动作快照验证
+    Ready --> Active: 激活发布代际
+    Active --> Draining: 管理员停用/授权撤销
+    Draining --> Disabled: 在途完成或持久检查点
+    Staged --> Failed: 检查失败
+    Ready --> Failed: 发布失败
+    Active --> Failed: 隔离运行故障
+    Failed --> Disabled: 安全停用
+    Disabled --> [*]

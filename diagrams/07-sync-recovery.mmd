@@ -1,0 +1,15 @@
+sequenceDiagram
+ participant F as 工厂业务与 Outbox
+ participant W as 同步 Worker
+ participant G as 集团接收与共享库
+ F->>F: 本地事务持久化事件
+ Note over W,G: 断网，消息积压至持久 Outbox
+ W->>G: 重连/协商事件版本与检查点
+ G-->>W: 最后持久确认位置
+ loop 依业务实体顺序补传
+ W->>G: 事件 ID/版本/序号
+ G->>G: 幂等去重并持久处理
+ G-->>W: 持久确认位置
+ end
+ W->>G: 对账 / 必要快照
+ G-->>W: 差异或修复结果

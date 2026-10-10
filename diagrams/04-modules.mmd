@@ -1,0 +1,12 @@
+flowchart LR
+    Host[最小稳定内核: 注册/依赖/生命周期]
+    Con[模块公开契约]
+    Tech[可选官方技术模块]
+    Biz[可信业务模块]
+    Plug[隔离插件]
+    GraphQL[GraphQL Schema 组合]
+    Host --> Con
+    Tech --> Con
+    Biz --> Con
+    Plug -->|公开 API / 事件 / 动作| Con
+    Con --> GraphQL
